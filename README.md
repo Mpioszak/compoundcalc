@@ -52,7 +52,7 @@ For $1,000 principal, $100 annual addition, 5 years, 5% compounded annually:
 
 ## Running it locally
 
-The whole app is one file, [compound-interest.html](compound-interest.html), with no build step. Open it in any modern browser. It needs an internet connection to load the chart library and fonts.
+The whole app is one file, with no build step. Open it in any modern browser. It needs an internet connection to load the chart library and fonts.
 
 ## Built with
 
