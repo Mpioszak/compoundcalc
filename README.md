@@ -10,6 +10,7 @@ A single-page web app that works out how much a starting balance plus regular ye
 - **Breakdown** of the final balance into starting principal, total additions and interest earned, each with its share of the total
 - **Growth chart**: a stacked bar for each year showing principal, additions and interest; hover a bar for exact amounts and that year's balance
 - **Year-by-year schedule**: a collapsible table of the amount added, interest earned, running totals and balance for every year
+- **Per-year interest rates**: use one rate for every year, or set a different rate for each year
 - Light and dark themes that follow your system setting
 - Works on phones and desktops
 
@@ -20,21 +21,31 @@ A single-page web app that works out how much a starting balance plus regular ye
 | Current principal | The amount you start with today |
 | Annual addition | How much you add each year, split evenly across the compounding periods |
 | Years to grow | 1 to 100 years |
-| Annual interest rate | The yearly rate, as a percentage |
+| Annual interest rate | The yearly rate, as a percentage. Choose **Same every year** for one rate, or **Varies by year** to set a rate for each year (see below) |
 | Compounded | Annually, semiannually, quarterly, monthly, weekly or daily |
 | Make additions at | The start or end of each compounding period |
+
+### Setting a rate for each year
+
+Choose **Varies by year** to show one rate box per year, matching the number of years to grow.
+
+- A blank year repeats the year before it, and a blank year 1 uses the single rate from **Same every year**. Each blank box shows the rate it will use in grey.
+- Years you have set get a coloured border, so to model 8% for five years and then 5%, type 8 in year 1 and 5 in year 6.
+- If you lower the number of years and raise it again, the rates you entered come back.
+- **Reset all** clears every year back to the single rate.
+- The schedule gains a Rate column, and hovering a bar in the chart shows that year's rate.
 
 ## How it calculates
 
 The calculator steps through every compounding period instead of using a closed-form formula, so the yearly figures in the chart and table come straight from the same loop as the total.
 
-With annual rate `r`, `n` compounding periods per year and annual addition `A`, each period:
+With annual rate `r` (the rate for the current year, when rates vary by year), `n` compounding periods per year and annual addition `A`, each period:
 
 1. If additions are at the **start** of the period, add `A / n` to the balance.
 2. Add interest: `balance × r / n`.
 3. If additions are at the **end** of the period, add `A / n` to the balance.
 
-This gives the same result as the standard formulas:
+With one rate for every year, this gives the same result as the standard formulas:
 
 ```
 End of period:   FV = P(1 + r/n)^(nt) + (A/n) × [((1 + r/n)^(nt) − 1) / (r/n)]
@@ -62,5 +73,5 @@ The whole app is one file, with no build step. Open it in any modern browser. It
 
 ## Notes
 
-- Results are estimates. They assume a fixed interest rate and do not account for taxes, fees or inflation.
+- Results are estimates. Each year's rate is applied evenly across that year, and the results do not account for taxes, fees or inflation.
 - This is not financial advice.
